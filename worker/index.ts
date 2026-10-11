@@ -12,8 +12,8 @@ const emailWorker = new Worker<emailJobSchema>(
     "email-worker",
     async (job: Job<emailJobSchema>) => {
         // @ts-ignore
-        const {subject, recipient, body} = job;
-        await sendEmail(recipient, body, subject);
+        const {subject, recipient, body} = job.data;
+        await sendEmail(recipient, {html: body} , subject);
     },
     {
         connection: redisConnection
