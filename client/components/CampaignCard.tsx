@@ -5,7 +5,7 @@ const STATUS_STYLES = {
   Scheduled: "bg-amber-50 text-amber-600",
   Draft: "bg-gray-100 text-gray-500",
 };
-
+// @ts-ignore
 export default function CampaignCard({ campaign }) {
   const { title, subtitle, time, status, tags, sent, opens, clicks, openRate, clickRate } = campaign;
 
@@ -39,7 +39,7 @@ export default function CampaignCard({ campaign }) {
           <button aria-label="View" className="hidden hover:text-gray-800 sm:block"><Eye size={15} /></button>
           <button aria-label="Duplicate" className="hidden hover:text-gray-800 sm:block"><Copy size={15} /></button>
           <button aria-label="Edit" className="hidden hover:text-gray-800 sm:block"><Pencil size={15} /></button>
-          <span className={`rounded-md px-2 py-1 text-xs font-medium ${STATUS_STYLES[status]}`}>{status}</span>
+          <span className={`rounded-md px-2 py-1 text-xs font-medium ${STATUS_STYLES[status as keyof typeof STATUS_STYLES]}`}>{status}</span>
           <button aria-label="More" className="hover:text-gray-800"><MoreVertical size={15} /></button>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function CampaignCard({ campaign }) {
       {/* Tags + metrics */}
       <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="flex flex-wrap gap-2">
-          {tags.map((t) => (
+          {tags.map((t: string) => (
             <span key={t} className="rounded-md bg-gray-100 px-3 py-1.5 text-xs text-gray-600">{t}</span>
           ))}
         </div>

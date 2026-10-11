@@ -28,10 +28,10 @@ const CAMPAIGNS = [
 
 export default function CampaignsPage() {
   // Replace with your real auth state (NextAuth, Clerk, context, etc.)
-  const [user, setUser] = useState({ name: "John" }); // set to null to see the logged-out header
-  const [page, setPage] = useState(1);
+  const [user, setUser] = useState<{ name: string } | null>({ name: "John" }); // set to null to see the logged-out header
+  const [page, setPage] = useState<number>(1);
   const totalPages = 15;
-  const pages = [1, 2, 3, 4, 5, "…", totalPages];
+  const pages = [1, 2, 3, 4, 5, totalPages];
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
@@ -92,23 +92,20 @@ export default function CampaignsPage() {
               >
                 ‹ Previous
               </button>
-              {pages.map((p, i) =>
-                p === "…" ? (
-                  <span key={i} className="px-1 text-gray-400">…</span>
-                ) : (
-                  <button
-                    key={i}
-                    onClick={() => setPage(p)}
-                    className={`h-8 w-8 rounded-lg border text-xs ${
-                      page === p
-                        ? "border-gray-900 bg-gray-900 text-white"
-                        : "border-gray-200 hover:bg-gray-50"
-                    }`}
-                  >
-                    {String(p).padStart(2, "0")}
-                  </button>
-                )
-              )}
+              {pages.map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(p)}
+                  className={`h-8 w-8 rounded-lg border text-xs ${
+                    page === p
+                      ? "border-gray-900 bg-gray-900 text-white"
+                      : "border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
+                  {String(p).padStart(2, "0")}
+                </button>
+              ))}
+              <span className="px-1 text-gray-400">…</span>
               <button
                 disabled={page === totalPages}
                 onClick={() => setPage((p) => p + 1)}

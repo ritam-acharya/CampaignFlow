@@ -1,6 +1,14 @@
-import { MoreVertical } from "lucide-react";
+import { MoreVertical, type LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
-export default function StatCard({ icon: Icon, label, value, change }) {
+type StatCardProps = {
+  icon: LucideIcon;
+  label: string;
+  value: ReactNode;
+  change: number;
+};
+
+export default function StatCard({ icon: Icon, label, value, change }: StatCardProps) {
   const positive = change >= 0;
   return (
     <div className="rounded-2xl border border-gray-100 bg-white p-3 shadow-sm">
